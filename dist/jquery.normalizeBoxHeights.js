@@ -1,4 +1,7 @@
-﻿// Used in layouts with multiple content items rendered in boxes. Iterates over a selection set and adjusts
+/*! jquery.normalizeBoxHeights - v0.1.0 - 2016-03-23
+* https://github.com/CarlRaymond/jquery.normalizeBoxHeights
+* Copyright (c) 2016 ; Licensed GPLv2 */
+// Used in layouts with multiple content items rendered in boxes. Iterates over a selection set and adjusts
 // heights of each item so that each row (defined as items sharing the same top offset) are equal-height.
 // When in a responsive layout, re-invoke on resize or 
 (function (factory) {
