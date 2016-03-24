@@ -82,14 +82,15 @@
     // Apply normalizer to selection set, and re-invoke on named
     // events, with debouncing.
     $.fn.normalizeBoxHeights = function(events) {
-        this.normalizer();
+        var $items = this;
+        normalizer.apply($items);
         
         // If events mentioned, watch them
         if (arguments.length > 0) {
             var renormalizer = debounce(normalizer, 250);
             
             $.each(events, function(index, event) {
-               $(window).on(event, renormalizer);
+               $(window).on(event, renormalizer.apply($items));
             });
         }
         
