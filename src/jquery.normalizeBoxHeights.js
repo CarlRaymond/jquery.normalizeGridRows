@@ -1,6 +1,5 @@
 ﻿// Used in layouts with multiple content items rendered in boxes. Iterates over a selection set and adjusts
 // heights of each item so that each row (defined as items sharing the same top offset) are equal-height.
-// When in a responsive layout, re-invoke on resize or 
 (function (factory) {
     
     // Register as a module with CommonJS or AMD, or as a plain jQuery
@@ -17,7 +16,9 @@
 		factory(jQuery);
 	}
 }(function($) {
-	$.fn.normalizeBoxHeights = function() {
+    
+    // This function does the work
+    var normalizer = function() {
 		var $items = this;
 
 		// Set auto so items assume their natural height
@@ -35,7 +36,7 @@
 
 			if (index === 0) {
 				// Start first row
-				rowStart = index;
+				rowStart = 0;
 				maxRowHeight = height;
 				currentTopOffset = topOffset;
 			}
@@ -61,4 +62,35 @@
 		// Update final row
 		$items.slice(rowStart).height(maxRowHeight);
 	};
+    
+    // Transforms a supplied function into a debounced version. Invoking the
+    // resulting function will start a timer of 'delay' milliseconds, and
+    // then execute the target function. Subsequent invocations will reset
+    // the timer. This is useful as an event handler for rapidly repeating events
+    // like resize.
+    var debounce = function(target_fn, delay) {
+        var timer;
+        return function() {
+            clearTimeout(timer);
+            timer = setTimeout(target_fn, delay);
+        };
+    };
+    
+    // Apply normalizer to selection set, and re-invoke on named
+    // events, with debouncing.
+    $.fn.normalizeBoxHeights = function(events) {
+        this.normalizer();
+        
+        // If events mentioned, watch them
+        if (arguments.length > 0) {
+            var renormalizer = debounce(normalizer, 250);
+            
+            $.each(events, function(index, event) {
+               $(window).on(event, renormalizer);
+            });
+        }
+        
+        // Allow chaining
+        return this;
+    };
 }));
