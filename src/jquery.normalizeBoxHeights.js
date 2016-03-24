@@ -76,17 +76,19 @@
         };
     };
     
-    // Apply normalizer to selection set, and re-invoke on named
-    // events, with debouncing.
-    $.fn.normalizeBoxHeights = function(events) {
+    // The plugin proper.
+    $.fn.normalizeBoxHeights = function() {
         var $items = this;
+
+        // Apply normalizer to selection set
         normalizer.apply($items);
         
-        // If events mentioned, watch them
+        // If events mentioned, re-normalize when they are triggered,
+        // with 250ms of debouncing.
         if (arguments.length > 0) {
             var renormalizer = debounce(normalizer, 250);
             
-            $.each(events, function(index, event) {
+            $.each(arguments, function(index, event) {
                $(window).on(event, renormalizer.apply($items));
             });
         }
