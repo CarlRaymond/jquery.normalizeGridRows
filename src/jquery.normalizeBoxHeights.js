@@ -61,7 +61,7 @@
 					// Passed end of row. Update heights of current row.
 					$items.slice(rowStart, index).height(maxRowHeight);
 
-					// Start next row with this item. Adjusting heights in
+                    // Start next row with this item. Adjusting heights in
                     // current row may have changed this item's top offset.
 					rowStart = index;
 					maxRowHeight = height;
