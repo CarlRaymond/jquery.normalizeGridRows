@@ -1,16 +1,13 @@
-/*! jquery.normalizeBoxHeights - v0.1.0 - 2016-03-24
-* https://github.com/CarlRaymond/jquery.normalizeBoxHeights
-* Copyright (c) 2016 ; Licensed GPLv2 */
-// Used in layouts with multiple content items rendered in boxes. Iterates over a selection set and adjusts
+﻿// Used in layouts with multiple content items rendered in boxes. Iterates over a selection set and adjusts
 // heights of each item so that each row (defined as items sharing the same top offset) are equal-height.
 //
-// Usage: $("{selector}").normalizeBoxHeights()
+// Usage: $("{selector}").normalizeGridBoxes()
 // Resizes the elements specified by the selector.
 //
 // To re-apply when certain events occur on the window, specify an array of event names and
 // a debounce delay interval in milliseconds. This prevents rapidly invoking the behavior
 // multiple times when the events are triggered rapidly. This is a common scenario:
-// $("{selector}").normalizeBoxHeights({ events: ['resize', 'orientationchange' ]});
+// $("{selector}").normalizeGridBoxes({ events: ['resize', 'orientationchange' ]});
 //
 // The defaults are { events: [], delay: 250 }, meaning no window events are handled,
 // and the debounce delay is 250ms.
@@ -64,7 +61,7 @@
 					// Passed end of row. Update heights of current row.
 					$items.slice(rowStart, index).height(maxRowHeight);
 
-					// Start next row with this item. Adjusting heights in
+                    // Start next row with this item. Adjusting heights in
                     // current row may have changed this item's top offset.
 					rowStart = index;
 					maxRowHeight = height;
@@ -96,7 +93,7 @@
     };
     
     // The plugin proper.
-    $.fn.normalizeBoxHeights = function(options) {
+    $.fn.normalizeGridBoxes = function(options) {
         var $items = this;
         var settings = $.extend({}, defaults, options);
         

@@ -1,13 +1,13 @@
 {
-  "name": "jquery.normalizeBoxHeights",
+  "name": "jquery.normalizeGridBoxes",
   "version": "0.1.0",
-  "description": "jQuery plugin for box-oriented layouts that will update the heights of elements so that each row of elements has the same height.",
+  "description": "jQuery plugin for grid-of-boxes layouts that will update the heights of elements so that each row of elements has the same height.",
   "scripts": {
     "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CarlRaymond/jquery.normalizeBoxHeights.git"
+    "url": "https://github.com/CarlRaymond/jquery.normalizeGridBoxes.git"
   },
   "keywords": [
     "jquery-plugin",
@@ -18,9 +18,9 @@
   "author": "Carl J. Raymond",
   "license": "GPLv2",
   "bugs": {
-    "url": "https://github.com/CarlRaymond/jquery.normalizeBoxHeights/issues"
+    "url": "https://github.com/CarlRaymond/jquery.normalizeGridBoxes/issues"
   },
-  "homepage": "https://github.com/CarlRaymond/jquery.normalizeBoxHeights",
+  "homepage": "https://github.com/CarlRaymond/jquery.normalizeGridBoxes",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",

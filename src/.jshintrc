@@ -9,6 +9,6 @@
   "eqnull": true,
   "browser": true,
   "devel": true,
-  "predef": ["jQuery"],
+  "predef": ["jQuery", "define", "module"],
   "es3": true
 }
