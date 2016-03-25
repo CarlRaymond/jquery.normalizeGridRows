@@ -3,6 +3,17 @@
 * Copyright (c) 2016 ; Licensed GPLv2 */
 // Used in layouts with multiple content items rendered in boxes. Iterates over a selection set and adjusts
 // heights of each item so that each row (defined as items sharing the same top offset) are equal-height.
+//
+// Usage: $("{selector}").normalizeBoxHeights()
+// Resizes the elements specified by the selector.
+//
+// To re-apply when certain events occur on the window, specify an array of event names and
+// a debounce delay interval in milliseconds. This prevents rapidly invoking the behavior
+// multiple times when the events are triggered rapidly. This is a common scenario:
+// $("{selector}").normalizeBoxHeights({ events: ['resize', 'orientationchange' ]});
+//
+// The defaults are { events: [], delay: 250 }, meaning no window events are handled,
+// and the debounce delay is 250ms.
 (function (factory) {
     
     // Register as a module with CommonJS or AMD, or as a plain jQuery
@@ -20,9 +31,9 @@
 	}
 }(function($) {
     
-    // This function does the work
-    var normalizer = function() {
-		var $items = this;
+    // This function does the work. It's a standard function, so the 
+    // collection to work on is supplied as an argument.
+    var normalize = function($items) {
 
 		// Set auto so items assume their natural height
 		$items.css({ height: 'auto' });
@@ -32,7 +43,7 @@
 		var currentTopOffset = 0; // Top offset of elements in current row
 
         // Iterate the selection set in document order
-		this.each(function (index) {
+		$items.each(function (index) {
 			var $item = $(this);
 			var height = $item.height();
 			var topOffset = $item.offset().top;
@@ -79,20 +90,26 @@
         };
     };
     
+    var defaults = {
+        delay: 250,
+        events: []
+    };
+    
     // The plugin proper.
-    $.fn.normalizeBoxHeights = function() {
+    $.fn.normalizeBoxHeights = function(options) {
         var $items = this;
-
-        // Apply normalizer to selection set
-        normalizer.apply($items);
+        var settings = $.extend({}, defaults, options);
+        
+        // Normalize the selection set
+        normalize($items);
         
         // If events mentioned, re-normalize when they are triggered,
-        // with 250ms of debouncing.
-        if (arguments.length > 0) {
-            var renormalizer = debounce(normalizer, 250);
+        // with debouncing.
+        if (settings.events.length > 0) {
+            var renormalize = debounce(function() { normalize($items); }, settings.delay);
             
-            $.each(arguments, function(index, event) {
-               $(window).on(event, renormalizer.apply($items));
+            $.each(settings.events, function(index, event) {
+               $(window).on(event, renormalize);
             });
         }
         
