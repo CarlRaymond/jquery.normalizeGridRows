@@ -16,7 +16,7 @@
     "layout"
   ],
   "author": "Carl J. Raymond",
-  "license": "GPLv2",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CarlRaymond/jquery.normalizeGridBoxes/issues"
   },
