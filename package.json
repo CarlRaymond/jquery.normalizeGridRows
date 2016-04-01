@@ -1,6 +1,6 @@
 {
   "name": "jquery.normalize-grid-rows",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "jQuery plugin for grid-of-boxes layouts that will update the heights of elements, row by row, so that each row has the same height.",
   "scripts": {
     "test": "grunt test"
@@ -14,7 +14,7 @@
     "ecosystem:jquery",
     "responsive",
     "layout",
-	"grid"
+    "grid"
   ],
   "author": "Carl J. Raymond",
   "license": "MIT",
