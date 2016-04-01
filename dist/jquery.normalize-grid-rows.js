@@ -1,4 +1,4 @@
-/*! jquery.normalize-grid-rows - v0.1.0 - 2016-03-31
+/*! jquery.normalize-grid-rows - v0.1.0 - 2016-04-01
 * https://github.com/CarlRaymond/jquery.normalizeGridRows
 * Copyright (c) 2016 ; Licensed MIT */
 // jQuery plugin for grid-of-boxes layouts. Iterates over a selection set and adjusts
