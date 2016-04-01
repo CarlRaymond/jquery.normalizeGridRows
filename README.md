@@ -5,8 +5,8 @@ so that each row of elements has the same height, that of the largest in the row
 It can listen for window resize or other events to re-apply itself.
 
 ## Usage
-Include jQuery and this plugin (either `dist/jquery.normalizeGridRows.js` or
-`dist/jquery.normalizeGridRows.min.js`) in your page, then invoke:
+Include jQuery and this plugin (either `dist/jquery.normalize-grid-rows.js` or
+`dist/jquery.normalize-grid-rows.min.js`) in your page, then invoke:
         `$(".myboxes").normalizeGridRows();`
 where ".myboxes" is a jQuery selector to locate the elements of interest. This
 will adjust the collection one time.
