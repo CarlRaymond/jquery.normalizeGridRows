@@ -1,18 +1,24 @@
-﻿// jQuery plugin for grid-of-boxes layouts. Iterates over a selection set and adjusts
+/*! jquery.normalize-grid-rows - v0.1.0 - 2016-03-31
+* https://github.com/CarlRaymond/jquery.normalizeGridRows
+* Copyright (c) 2016 ; Licensed MIT */
+// jQuery plugin for grid-of-boxes layouts. Iterates over a selection set and adjusts
 // heights of each item so that each row (defined as items sharing the same top offset)
 // are equal-height.
 //
-// Usage: $("{selector}").normalizeGridBoxes()
+// Usage: $("{selector}").normalizeGridRows()
 // Resizes the elements specified by the selector.
 //
 // To re-apply when certain events occur on the window, specify an array of event names and
 // a debounce delay interval in milliseconds. Debouncing prevents rapidly invoking the
 // handler multiple times when the events are triggered rapidly. This is a common scenario:
-// $("{selector}").normalizeGridBoxes({ events: ['resize', 'orientationchange' ]});
+// $("{selector}").normalizeGridRows({ events: ['resize', 'orientationchange' ]});
 //
 // The defaults are { events: [], delay: 250 }, meaning no window events are handled,
 // and the debounce delay is 250ms.
-(function (factory) {
+//
+// Plugin wrapped up in an IIFE. The argument factory is a function invoked in one of
+// three ways (depending on the environment) to register the plugin with jQuery.
+;(function (factory) {
 
 	// Register as a module in a module environment, or as a plain jQuery
 	// plugin in a bare environment.
@@ -29,7 +35,7 @@
 	}
 }(function($) {
 
-	// This function does the work on the jQuery collection
+	// Normalize does the work on the jQuery collection
 	// supplied as an argument. Iterates the collection (assumed to be
 	// in document order), finding elements that share the same
 	// top offset, and therefore form a row. The elements in the row
@@ -83,7 +89,7 @@
 	// then execute the target function. Subsequent invocations will reset
 	// the timer. This is useful as an event handler for rapidly repeating events
 	// like resize.
-	var debounce = function(target_fn, delay) {
+	var debounced = function(target_fn, delay) {
 		var timer;
 		return function() {
 			clearTimeout(timer);
@@ -94,11 +100,11 @@
 	// Default options for the plugin.
 	var defaults = {
 		delay: 250,		// Debounce interval, milliseconds
-		events: []		// Events to monitor
+		events: []		// Events to monitor, as array of strings
 	};
 
 	// The plugin proper.
-	$.fn.normalizeBoxHeights = function(options) {
+	$.fn.normalizeGridRows = function(options) {
 		var $items = this;
 		var settings = $.extend({}, defaults, options);
 		
@@ -108,7 +114,7 @@
 		// If any events mentioned, re-normalize when they are triggered,
 		// with debouncing.
 		if (settings.events.length > 0) {
-			var renormalize = debounce(function() { normalize($items); }, settings.delay);
+			var renormalize = debounced(function() { normalize($items); }, settings.delay);
 			
 			$.each(settings.events, function(index, eventname) {
 				$(window).on(eventname, renormalize);
